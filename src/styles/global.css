@@ -1,0 +1,191 @@
+@import 'tailwindcss';
+
+/*
+ * DrupalX brand tokens — matches the drupalx-project starter palette
+ * (deep DrupalX blue + warm gold accent, sky/clay wayfinding families).
+ */
+@theme {
+  --color-primary-50: #eef4fc;
+  --color-primary-100: #d8e6f8;
+  --color-primary-200: #b0cdf1;
+  --color-primary-300: #7fade7;
+  --color-primary-400: #4f8bd9;
+  --color-primary-500: #2f6fc4;
+  --color-primary-600: #265aa3;
+  --color-primary-700: #1e4a86;
+  --color-primary-800: #173a69;
+  --color-primary-900: #102a4c;
+
+  --color-accent-50: #fdf6e5;
+  --color-accent-100: #f8e6b6;
+  --color-accent-200: #f3d78e;
+  --color-accent-300: #ecc766;
+  --color-accent-400: #e5b94d;
+  --color-accent-500: #dfab34;
+  --color-accent-600: #b6841a;
+  --color-accent-700: #8f6712;
+
+  --color-sky-50: #eaf3fb;
+  --color-sky-100: #cde3f5;
+  --color-sky-300: #8fbde8;
+  --color-sky-600: #2570b6;
+  --color-sky-700: #1c5690;
+
+  --color-clay-50: #fbf0ea;
+  --color-clay-100: #f3d9cb;
+  --color-clay-400: #d4854f;
+  --color-clay-500: #c9703a;
+  --color-clay-600: #a4552a;
+  --color-clay-700: #82401f;
+
+  --color-ink: #212529;
+  --color-ink-700: #343a40;
+  --color-ink-500: #6c757d;
+
+  --font-sans: 'Inter Variable', ui-sans-serif, system-ui, sans-serif;
+  --font-display: 'Fraunces Variable', ui-serif, Georgia, serif;
+
+  --container-site: 1600px;
+  --container-content: 1240px;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-sans);
+  color: var(--color-ink);
+}
+
+/* Anchors clear the sticky header. */
+:where([id]) {
+  scroll-margin-top: 6rem;
+}
+
+@layer base {
+  h1, h2, h3, h4 {
+    color: var(--color-primary-800);
+    font-weight: 700;
+    letter-spacing: -0.01em;
+  }
+  button, [role='button'], summary {
+    cursor: pointer;
+  }
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-accent-600);
+  outline-offset: 2px;
+}
+
+/* ── Bold-design primitives (spark conventions) ─────────────────────── */
+
+.display-hero {
+  font-family: var(--font-display);
+  font-size: clamp(2.75rem, 6.5vw, 5.5rem);
+  line-height: 0.98;
+  letter-spacing: -0.02em;
+  font-weight: 600;
+}
+.display-xl {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 4.5vw, 3.25rem);
+  line-height: 1.05;
+  letter-spacing: -0.015em;
+  font-weight: 600;
+}
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--color-primary-600);
+}
+.eyebrow::before {
+  content: '';
+  width: 1.75rem;
+  height: 2px;
+  background: currentColor;
+  border-radius: 2px;
+}
+
+.brand-glow {
+  background:
+    radial-gradient(60% 80% at 30% 20%,
+      color-mix(in srgb, var(--color-accent-500) 22%, transparent), transparent 70%),
+    var(--color-primary-900);
+}
+
+.stat-num {
+  font-size: clamp(2.25rem, 4.5vw, 4rem);
+  line-height: 1.08;
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.03em;
+}
+
+/* spark-card — the standard fancy rollover. */
+.spark-card {
+  position: relative;
+  transition: transform 200ms ease, box-shadow 200ms ease, border-color 200ms ease;
+  will-change: transform;
+}
+.spark-card::before {
+  content: '';
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 3px;
+  border-top-left-radius: inherit;
+  border-top-right-radius: inherit;
+  background: var(--color-primary-500);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 220ms ease;
+}
+.spark-card:hover,
+.spark-card:focus-within {
+  transform: translateY(-4px);
+  box-shadow: 0 14px 30px rgba(16, 42, 76, 0.13);
+  border-color: var(--color-primary-300);
+}
+.spark-card:hover::before,
+.spark-card:focus-within::before {
+  transform: scaleX(1);
+}
+@media (prefers-reduced-motion: reduce) {
+  .spark-card, .spark-card::before { transition: none; }
+  .spark-card:hover, .spark-card:focus-within { transform: none; }
+}
+
+/* Scroll-reveal — progressive enhancement (never hidden without JS). */
+.reveal-ready [data-reveal] {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.6s ease-out, transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.reveal-ready [data-reveal].is-visible {
+  opacity: 1;
+  transform: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  [data-reveal] { opacity: 1; transform: none; transition: none; }
+}
+
+/* Terminal / code cards. */
+.term {
+  background: #0b1626;
+  color: #d7e3f4;
+  border-radius: 1rem;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.875rem;
+  line-height: 1.7;
+  overflow-x: auto;
+}
+.term .prompt { color: var(--color-accent-400); user-select: none; }
+.term .cmt { color: #64748b; }
+.term .tok { color: #8fbde8; }
