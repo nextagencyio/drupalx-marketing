@@ -56,6 +56,95 @@ const cMap: Record<string, { chip: string }> = {
   accent: { chip: 'bg-accent-50 text-accent-700' },
 };
 
+const componentGroups = [
+  {
+    label: 'Section components',
+    items: [
+      { icon: 'lucide:image', name: 'Hero (glass / split / dark)' },
+      { icon: 'lucide:panel-top', name: 'Page hero' },
+      { icon: 'lucide:trending-up', name: 'Stat band' },
+      { icon: 'lucide:hash', name: 'Stat' },
+      { icon: 'lucide:layout-grid', name: 'Card grid' },
+      { icon: 'lucide:square', name: 'Card' },
+      { icon: 'lucide:newspaper', name: 'News card' },
+      { icon: 'lucide:calendar', name: 'Event card' },
+      { icon: 'lucide:columns-2', name: 'Split' },
+      { icon: 'lucide:megaphone', name: 'Call to action' },
+      { icon: 'lucide:quote', name: 'Quote' },
+      { icon: 'lucide:text', name: 'Rich text' },
+      { icon: 'lucide:images', name: 'Gallery' },
+      { icon: 'lucide:list-collapse', name: 'Accordion' },
+      { icon: 'lucide:list-plus', name: 'Accordion item' },
+      { icon: 'lucide:triangle-alert', name: 'Alert banner' },
+      { icon: 'lucide:folder-open', name: 'Document list' },
+      { icon: 'lucide:file-text', name: 'Document item' },
+    ],
+  },
+  {
+    label: 'Primitives',
+    items: [
+      { icon: 'lucide:mouse-pointer-click', name: 'Button' },
+      { icon: 'lucide:heading', name: 'Heading' },
+      { icon: 'lucide:sparkles', name: 'Icon' },
+      { icon: 'lucide:image-plus', name: 'Image' },
+      { icon: 'lucide:minus', name: 'Divider' },
+      { icon: 'lucide:unfold-vertical', name: 'Spacer' },
+    ],
+  },
+];
+
+const faqs = [
+  {
+    q: 'Is DrupalX a Drupal distribution?',
+    a: 'No — it\'s a Composer project template. You clone it and own the code: the theme, the components, and the recipe live in your repository, so there\'s no distribution lock-in and nothing upstream can break your site.',
+  },
+  {
+    q: 'What is Canvas?',
+    a: 'Canvas is Drupal\'s Experience Builder — the visual page-building initiative for Drupal core. Editors compose pages from components: drag from the library, edit props as form fields, nest components into slots. DrupalX ships a component library designed for it.',
+  },
+  {
+    q: 'Do I need Node.js to run the site?',
+    a: 'No. The theme\'s compiled assets are committed, so Drupal renders with zero Node builds. You only need Node when changing the theme (Tailwind rebuild) or using the static preview workbench.',
+  },
+  {
+    q: 'Can editors break the design?',
+    a: 'Not really — components expose schema-validated props, not free-form HTML. Enums render as selects, images go through the media library, and repeatable content is real nested components. The design system is enforced by the schemas.',
+  },
+  {
+    q: 'How do I rebrand it?',
+    a: 'Recolor one token block in the theme\'s global.css (a primary scale, an accent scale, two wayfinding families), swap the font packages and logo, and rebuild. The whole site re-skins — see the two screenshots above.',
+  },
+  {
+    q: 'What\'s the license?',
+    a: 'GPL-2.0-or-later, the same as Drupal. Free for any use, including client work.',
+  },
+];
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'SoftwareApplication',
+      name: 'DrupalX',
+      applicationCategory: 'DeveloperApplication',
+      operatingSystem: 'Any',
+      offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+      license: 'https://www.gnu.org/licenses/old-licenses/gpl-2.0.html',
+      url: 'https://drupalx.dev/',
+      downloadUrl: GITHUB,
+      description: 'A Drupal 11 project template built around Canvas (Experience Builder) and a Tailwind v4 component library.',
+    },
+    {
+      '@type': 'FAQPage',
+      mainEntity: faqs.map((f) => ({
+        '@type': 'Question',
+        name: f.q,
+        acceptedAnswer: { '@type': 'Answer', text: f.a },
+      })),
+    },
+  ],
+};
+
 const stats = [
   { n: '24', l: 'Canvas-ready components' },
   { n: '5', l: 'demo pages on install' },
@@ -79,7 +168,12 @@ const stats = [
     <meta property="og:type" content="website" />
     <meta property="og:title" content="DrupalX — the modern Drupal starter for Canvas" />
     <meta property="og:description" content="Drupal 11 + Canvas + a Tailwind v4 design system. ddev install lands a complete five-page demo site." />
-    <meta property="og:image" content="/img/starter-blue.webp" />
+    <meta property="og:image" content="https://drupalx.dev/img/og.png" />
+    <meta property="og:url" content="https://drupalx.dev/" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="DrupalX — the modern Drupal starter for Canvas" />
+    <meta name="twitter:image" content="https://drupalx.dev/img/og.png" />
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
   </head>
 
   <body class="bg-white">
@@ -94,7 +188,7 @@ const stats = [
         </a>
         <nav class="max-lg:hidden" aria-label="Sections">
           <ul class="flex items-center gap-1">
-            {['Features', 'Theming', 'Workflow', 'Editor'].map((t) => (
+            {['Features', 'Components', 'Theming', 'Workflow', 'FAQ'].map((t) => (
               <li>
                 <a href={`#${t.toLowerCase()}`} class="px-3 py-2 rounded-lg text-[0.95rem] font-semibold text-ink-700 hover:text-primary-700 hover:bg-primary-50 transition-colors">{t}</a>
               </li>
@@ -112,7 +206,7 @@ const stats = [
       <!-- ── Hero ─────────────────────────────────────────────────── -->
       <section class="brand-glow relative overflow-hidden">
         <div class="max-w-content mx-auto px-4 sm:px-6 lg:px-8 py-20 lg:py-28 grid items-center gap-12 lg:grid-cols-[1.1fr_1fr]">
-          <div>
+          <div class="min-w-0">
             <p class="eyebrow text-accent-300">Drupal 11 · Canvas · Tailwind v4</p>
             <h1 class="display-hero mt-4 text-white">
               The Drupal starter your editors will <span class="text-accent-400">actually love</span>
@@ -134,7 +228,7 @@ const stats = [
           </div>
 
           <!-- Quick-start terminal card -->
-          <div class="relative">
+          <div class="relative min-w-0">
             <div class="absolute inset-0 translate-x-4 translate-y-4 rounded-2xl bg-accent-500/20" aria-hidden="true"></div>
             <div class="term relative p-6 shadow-2xl">
               <div class="flex gap-1.5 mb-4" aria-hidden="true">
@@ -197,11 +291,40 @@ const stats = [
         </div>
       </section>
 
+      <!-- ── Components ───────────────────────────────────────────── -->
+      <section id="components" class="bg-primary-50 py-20 md:py-28" data-reveal>
+        <div class="max-w-content mx-auto px-4 sm:px-6 lg:px-8">
+          <div class="max-w-3xl mb-12">
+            <p class="eyebrow">The component library</p>
+            <h2 class="display-xl mt-3">24 components, all Canvas-ready</h2>
+            <p class="mt-4 text-lg leading-relaxed text-ink-500">
+              Every one is a Single-Directory Component: a schema that drives the Canvas
+              edit form, and a Tailwind Twig template. The{' '}
+              <a href={`${GITHUB}/blob/main/web/themes/custom/drupalx_theme/COMPONENTS.md`} class="font-semibold text-primary-700 underline underline-offset-4 hover:text-primary-800">generated reference</a>{' '}
+              documents every prop, enum, and slot.
+            </p>
+          </div>
+          {componentGroups.map((group) => (
+            <div class="mb-8">
+              <h3 class="mb-4 text-xs font-bold uppercase tracking-[0.16em] text-ink-500">{group.label}</h3>
+              <ul class="flex flex-wrap gap-2.5">
+                {group.items.map((c) => (
+                  <li class="inline-flex items-center gap-2 rounded-full border border-primary-200 bg-white px-4 py-2 text-sm font-semibold text-primary-800 shadow-sm">
+                    <Icon name={c.icon} class="size-4 text-primary-500" aria-hidden="true" />
+                    {c.name}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
+      </section>
+
       <!-- ── Theming ──────────────────────────────────────────────── -->
-      <section id="theming" class="bg-primary-50 py-20 md:py-28" data-reveal>
+      <section id="theming" class="py-20 md:py-28" data-reveal>
         <div class="max-w-content mx-auto px-4 sm:px-6 lg:px-8">
           <div class="grid items-center gap-12 lg:grid-cols-2">
-            <div>
+            <div class="min-w-0">
               <p class="eyebrow">The theming system</p>
               <h2 class="display-xl mt-3">Rebrand in one file</h2>
               <p class="mt-4 text-lg leading-relaxed text-ink-500">
@@ -235,7 +358,7 @@ const stats = [
       </section>
 
       <!-- ── Workflow ─────────────────────────────────────────────── -->
-      <section id="workflow" class="py-20 md:py-28" data-reveal>
+      <section id="workflow" class="bg-primary-50 py-20 md:py-28" data-reveal>
         <div class="max-w-content mx-auto px-4 sm:px-6 lg:px-8">
           <div class="max-w-3xl mb-12">
             <p class="eyebrow">The workflow</p>
@@ -262,7 +385,7 @@ const stats = [
       </section>
 
       <!-- ── Editor ───────────────────────────────────────────────── -->
-      <section id="editor" class="bg-primary-50 py-20 md:py-28" data-reveal>
+      <section id="editor" class="py-20 md:py-28" data-reveal>
         <div class="max-w-content mx-auto px-4 sm:px-6 lg:px-8">
           <div class="max-w-3xl mb-10">
             <p class="eyebrow">The editing experience</p>
@@ -280,6 +403,24 @@ const stats = [
             width="1400" height="856" loading="lazy"
             class="rounded-2xl border border-primary-200 shadow-2xl w-full"
           />
+        </div>
+      </section>
+
+      <!-- ── FAQ ──────────────────────────────────────────────────── -->
+      <section id="faq" class="bg-primary-50 py-20 md:py-28" data-reveal>
+        <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+          <div class="mb-10">
+            <p class="eyebrow">FAQ</p>
+            <h2 class="display-xl mt-3">Good questions</h2>
+          </div>
+          <div class="grid gap-3">
+            {faqs.map((f, i) => (
+              <details class="faq-item" open={i === 0}>
+                <summary>{f.q}</summary>
+                <div class="faq-body">{f.a}</div>
+              </details>
+            ))}
+          </div>
         </div>
       </section>
 

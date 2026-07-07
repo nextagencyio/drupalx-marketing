@@ -189,3 +189,39 @@ body {
 .term .prompt { color: var(--color-accent-400); user-select: none; }
 .term .cmt { color: #64748b; }
 .term .tok { color: #8fbde8; }
+
+/* FAQ accordion — native details/summary, no JS. */
+.faq-item {
+  border: 1px solid var(--color-primary-100);
+  border-radius: 0.75rem;
+  background: #fff;
+  overflow: hidden;
+}
+.faq-item summary {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1rem 1.25rem;
+  font-weight: 700;
+  color: var(--color-primary-800);
+  min-height: 44px;
+}
+.faq-item summary::-webkit-details-marker { display: none; }
+.faq-item summary::after {
+  content: '+';
+  flex-shrink: 0;
+  font-size: 1.4rem;
+  line-height: 1;
+  color: var(--color-accent-600);
+  transition: rotate 0.2s ease;
+}
+.faq-item[open] summary::after { rotate: 45deg; }
+.faq-item[open] summary { background: var(--color-primary-50); }
+.faq-item .faq-body {
+  padding: 0.25rem 1.25rem 1.25rem;
+  color: var(--color-ink-500);
+  line-height: 1.65;
+}
+.faq-item .faq-body a { color: var(--color-primary-600); font-weight: 600; text-decoration: underline; }
