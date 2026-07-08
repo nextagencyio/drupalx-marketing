@@ -151,10 +151,46 @@ const stats = [
             ))}
           </ul>
         </nav>
-        <a href={GITHUB} class="inline-flex items-center gap-2 rounded-full bg-primary-600 px-5 py-2.5 min-h-11 text-sm font-bold text-white hover:bg-primary-500 transition-colors">
-          <Icon name="lucide:github" class="size-4" aria-hidden="true" />
-          GitHub
-        </a>
+        <div class="flex items-center gap-3">
+          <a href={GITHUB} class="max-sm:hidden inline-flex items-center gap-2 rounded-full bg-primary-600 px-5 py-2.5 min-h-11 text-sm font-bold text-white hover:bg-primary-500 transition-colors">
+            <Icon name="lucide:github" class="size-4" aria-hidden="true" />
+            GitHub
+          </a>
+          {/* Mobile menu toggle — hidden on lg (desktop nav shows instead). */}
+          <button
+            id="menu-toggle"
+            type="button"
+            class="lg:hidden inline-flex items-center justify-center size-11 rounded-lg text-white hover:bg-white/10 transition-colors"
+            aria-label="Open menu"
+            aria-expanded="false"
+            aria-controls="mobile-menu"
+          >
+            <Icon name="lucide:menu" class="size-6 menu-open-icon" aria-hidden="true" />
+            <Icon name="lucide:x" class="size-6 menu-close-icon hidden" aria-hidden="true" />
+          </button>
+        </div>
+      </div>
+
+      {/* Mobile menu panel — solid night surface for legibility over the hero. */}
+      <div
+        id="mobile-menu"
+        class="lg:hidden hidden border-t border-white/10 bg-night-950/95 backdrop-blur-md"
+      >
+        <nav class="max-w-site mx-auto px-4 sm:px-6 py-4" aria-label="Mobile sections">
+          <ul class="grid gap-1">
+            {['Features', 'Components', 'Theming', 'Workflow', 'FAQ'].map((t) => (
+              <li>
+                <a href={`#${t.toLowerCase()}`} data-menu-link class="block px-3 py-3 min-h-11 rounded-lg text-base font-semibold text-slate-200 hover:text-white hover:bg-white/10 transition-colors">{t}</a>
+              </li>
+            ))}
+            <li class="pt-2">
+              <a href={GITHUB} class="inline-flex w-full items-center justify-center gap-2 rounded-full bg-primary-600 px-5 py-3 min-h-11 text-sm font-bold text-white hover:bg-primary-500 transition-colors">
+                <Icon name="lucide:github" class="size-4" aria-hidden="true" />
+                View on GitHub
+              </a>
+            </li>
+          </ul>
+        </nav>
       </div>
     </header>
 
@@ -637,6 +673,26 @@ const stats = [
       const updateHeader = () => document.documentElement.classList.toggle('dx-at-top', window.scrollY < 24);
       updateHeader();
       window.addEventListener('scroll', updateHeader, { passive: true });
+
+      // Mobile menu toggle.
+      const menuToggle = document.getElementById('menu-toggle');
+      const mobileMenu = document.getElementById('mobile-menu');
+      const openIcon = menuToggle?.querySelector('.menu-open-icon');
+      const closeIcon = menuToggle?.querySelector('.menu-close-icon');
+      const setMenu = (open) => {
+        if (!mobileMenu || !menuToggle) return;
+        mobileMenu.classList.toggle('hidden', !open);
+        menuToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+        menuToggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+        openIcon?.classList.toggle('hidden', open);
+        closeIcon?.classList.toggle('hidden', !open);
+      };
+      menuToggle?.addEventListener('click', () => setMenu(mobileMenu.classList.contains('hidden')));
+      // Close on link tap and on Escape.
+      document.querySelectorAll('[data-menu-link]').forEach((l) => l.addEventListener('click', () => setMenu(false)));
+      document.addEventListener('keydown', (e) => { if (e.key === 'Escape') setMenu(false); });
+      // Close if resized up to desktop.
+      window.matchMedia('(min-width: 1024px)').addEventListener('change', (e) => { if (e.matches) setMenu(false); });
 
       // Copy buttons (hero + CTA).
       document.querySelectorAll('[data-copy]').forEach((btn) => {
