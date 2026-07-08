@@ -106,22 +106,24 @@ body {
   font-weight: 600;
 }
 
-.eyebrow {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  font-size: 0.8rem;
-  font-weight: 700;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  color: var(--color-primary-600);
-}
-.eyebrow::before {
-  content: '';
-  width: 1.75rem;
-  height: 2px;
-  background: currentColor;
-  border-radius: 2px;
+@layer components {
+  .eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--color-primary-600);
+  }
+  .eyebrow::before {
+    content: '';
+    width: 1.75rem;
+    height: 2px;
+    background: currentColor;
+    border-radius: 2px;
+  }
 }
 
 .brand-glow {
@@ -209,7 +211,7 @@ body {
 }
 .term .prompt { color: var(--color-accent-400); user-select: none; }
 .term .tok { color: var(--color-primary-300); }
-.term .cmt { color: #64748b; }
+.term .cmt { color: #8ba0b8; }
 
 /* FAQ accordion — native details/summary, no JS. */
 .faq-item {
