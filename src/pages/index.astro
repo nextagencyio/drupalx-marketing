@@ -44,28 +44,32 @@ const moreComponents = [
 
 const faqs = [
   {
-    q: 'Is DrupalX a Drupal distribution?',
-    a: 'No — it\'s a Composer project template. You clone it and own the code: the theme, the components, and the recipe live in your repository, so there\'s no distribution lock-in and nothing upstream can break your site.',
+    q: 'What exactly do I get when I clone it?',
+    a: 'A complete Drupal 11 project template — the Canvas page builder, the drupalx_theme component library, the site recipe, and a five-page demo site that appears the moment you run ddev install. You own all of it in your repository; there is no distribution to track and nothing upstream that can break your site.',
   },
   {
-    q: 'What is Canvas?',
-    a: 'Canvas is Drupal\'s Experience Builder — the visual page-building initiative for Drupal core. Editors compose pages from components: drag from the library, edit props as form fields, nest components into slots. DrupalX ships a component library designed for it.',
+    q: 'What is Canvas, and why build on it?',
+    a: 'Canvas is Drupal\'s Experience Builder — the core initiative for visual, in-place page building. Editors compose pages from components: drag from the library, edit props as form fields, nest cards into grids. DrupalX ships a component library designed for it, so you get the editor experience without assembling one yourself.',
   },
   {
-    q: 'Do I need Node.js to run the site?',
-    a: 'No. The theme\'s compiled assets are committed, so Drupal renders with zero Node builds. You only need Node when changing the theme (Tailwind rebuild) or using the static preview workbench.',
+    q: 'Can non-developers edit pages without breaking the design?',
+    a: 'Yes — and that is the point. Every component exposes schema-validated props, not free-form HTML: enums become dropdowns, images use the media library, and repeatable content is real nested components. Editors compose freely inside guardrails the design system enforces, so on-brand is the only option.',
   },
   {
-    q: 'Can editors break the design?',
-    a: 'Not really — components expose schema-validated props, not free-form HTML. Enums render as selects, images go through the media library, and repeatable content is real nested components. The design system is enforced by the schemas.',
+    q: 'How hard is it to rebrand for a client?',
+    a: 'One file. Recolor the token block in the theme\'s global.css — a primary scale, an accent scale, and two wayfinding families — then swap the fonts and logo and rebuild. The whole site re-skins; the "Rebrand in one file" section above is literally two token blocks apart.',
   },
   {
-    q: 'How do I rebrand it?',
-    a: 'Recolor one token block in the theme\'s global.css (a primary scale, an accent scale, two wayfinding families), swap the font packages and logo, and rebuild. The whole site re-skins.',
+    q: 'Is it production-ready or just a demo?',
+    a: 'Production-ready. It self-hosts fonts, inlines icons at build time, ships zero CDN dependencies, and serves width-stepped WebP images automatically. The demo content is there so the theming system works out of the box — delete it and build your own pages from the same 24 components.',
   },
   {
-    q: 'What\'s the license?',
-    a: 'GPL-2.0-or-later, the same as Drupal. Free for any use, including client work.',
+    q: 'Do I need Node.js to run a DrupalX site?',
+    a: 'No. The theme\'s compiled CSS, JS, icons, and fonts are committed, so Drupal renders with zero Node builds. You only reach for Node when you change the theme (a Tailwind rebuild) or use the optional static-preview workbench to design components without Drupal running.',
+  },
+  {
+    q: 'What does it cost?',
+    a: 'Nothing. DrupalX is GPL-2.0-or-later, the same license as Drupal itself — free for any use, including paid client work. Clone it, rebrand it, ship it.',
   },
 ];
 

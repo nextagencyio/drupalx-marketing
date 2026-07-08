@@ -263,7 +263,7 @@ body {
 .faq-item[open] summary::after { rotate: 45deg; }
 .faq-item[open] summary { background: var(--color-primary-50); }
 .faq-item .faq-body {
-  padding: 0.25rem 1.4rem 1.35rem;
+  padding: 0.9rem 1.4rem 1.35rem;
   color: var(--color-ink-500);
   line-height: 1.65;
 }
