@@ -83,9 +83,9 @@ body {
 
 .display-hero {
   font-family: var(--font-display);
-  font-size: clamp(2.75rem, 6.5vw, 5.5rem);
-  line-height: 0.98;
-  letter-spacing: -0.02em;
+  font-size: clamp(3rem, 7.5vw, 7rem);
+  line-height: 0.95;
+  letter-spacing: -0.025em;
   font-weight: 600;
 }
 .display-xl {
@@ -225,3 +225,56 @@ body {
   line-height: 1.65;
 }
 .faq-item .faq-body a { color: var(--color-primary-600); font-weight: 600; text-decoration: underline; }
+
+
+/* ── Marquee — the component wall scrolls; pauses on hover; static wrap
+   under reduced motion or without JS (rows are duplicated for the loop;
+   the duplicate is aria-hidden). */
+.marquee {
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(90deg, transparent, black 8%, black 92%, transparent);
+  mask-image: linear-gradient(90deg, transparent, black 8%, black 92%, transparent);
+}
+.marquee__track {
+  display: flex;
+  gap: 0.75rem;
+  width: max-content;
+  animation: marquee 46s linear infinite;
+}
+.marquee__track--reverse { animation-direction: reverse; }
+.marquee:hover .marquee__track { animation-play-state: paused; }
+@keyframes marquee {
+  to { transform: translateX(-50%); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .marquee { mask-image: none; -webkit-mask-image: none; }
+  .marquee__track { animation: none; flex-wrap: wrap; width: auto; }
+  .marquee__track [aria-hidden='true'] { display: none; }
+}
+
+/* Terminal typing caret (the hero's live module). */
+.type-caret::after {
+  content: '';
+  display: inline-block;
+  width: 0.55em;
+  height: 1.05em;
+  margin-left: 2px;
+  vertical-align: -0.15em;
+  background: var(--color-accent-400);
+  animation: caret-blink 1s steps(1) infinite;
+}
+@keyframes caret-blink { 50% { opacity: 0; } }
+
+/* Ghost numerals behind the workflow steps. */
+.ghost-num {
+  position: absolute;
+  top: -1.5rem;
+  right: 0.5rem;
+  font-family: var(--font-display);
+  font-size: clamp(6rem, 10vw, 9rem);
+  line-height: 1;
+  font-weight: 600;
+  color: var(--color-primary-100);
+  user-select: none;
+  pointer-events: none;
+}

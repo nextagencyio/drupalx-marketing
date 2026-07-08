@@ -1,7 +1,10 @@
 ---
 /**
  * DrupalX — single-page marketing site.
- * Astro 5 + Tailwind v4 (CSS-first tokens in src/styles/global.css).
+ * Astro 5 + Tailwind v4, built to the bold-design playbook at the
+ * destination-bold register: type as graphic, one live module (the typing
+ * terminal), a full-bleed screenshot ledge, bento features, marquee
+ * component wall, overlap/stagger compositions.
  */
 import '../styles/global.css';
 import '@fontsource-variable/inter';
@@ -10,87 +13,33 @@ import { Icon } from 'astro-icon/components';
 
 const GITHUB = 'https://github.com/nextagencyio/drupalx-project';
 
-const features = [
-  {
-    icon: 'lucide:layout-template',
-    c: 'sky',
-    title: 'Canvas page building',
-    body: 'Every landing page is composed in Drupal Canvas (Experience Builder). Editors drag components, fill in form fields, and nest cards into grids — no developer round-trip.',
-  },
-  {
-    icon: 'lucide:palette',
-    c: 'clay',
-    title: 'A real design system',
-    body: 'Tailwind v4 CSS-first tokens: a full brand scale, two wayfinding color families, editorial display type, and polished hover states — enforced by component schemas, not style guides.',
-  },
-  {
-    icon: 'lucide:zap',
-    c: 'accent',
-    title: 'Fast by default',
-    body: 'Self-hosted variable fonts, build-time Lucide icons inlined as SVG, and width-stepped WebP images via dx_image. Zero CDN dependencies anywhere.',
-  },
-  {
-    icon: 'lucide:blocks',
-    c: 'none',
-    title: '24 components, day one',
-    body: 'Heroes (glass, split, dark), stat bands, card grids, splits, CTAs, quotes, galleries, accordions, alerts, news & event cards, document lists — plus the primitives.',
-  },
-  {
-    icon: 'lucide:eye',
-    c: 'sky',
-    title: 'Static preview pipeline',
-    body: 'The same Twig components render in a Twing-powered dev server with live reload — design components in milliseconds, no Drupal in the loop.',
-  },
-  {
-    icon: 'lucide:shield-check',
-    c: 'clay',
-    title: 'Guardrails for editors',
-    body: 'Props are schema-validated: enums become selects, images use the media library, repeatable content is real nested components. Editors can’t break the design.',
-  },
+const sectionComponents = [
+  { icon: 'lucide:image', name: 'Hero — glass / split / dark' },
+  { icon: 'lucide:panel-top', name: 'Page hero' },
+  { icon: 'lucide:trending-up', name: 'Stat band' },
+  { icon: 'lucide:hash', name: 'Stat' },
+  { icon: 'lucide:layout-grid', name: 'Card grid' },
+  { icon: 'lucide:square', name: 'Card' },
+  { icon: 'lucide:newspaper', name: 'News card' },
+  { icon: 'lucide:calendar', name: 'Event card' },
+  { icon: 'lucide:columns-2', name: 'Split' },
+  { icon: 'lucide:megaphone', name: 'Call to action' },
+  { icon: 'lucide:quote', name: 'Quote' },
+  { icon: 'lucide:text', name: 'Rich text' },
 ];
-
-const cMap: Record<string, { chip: string }> = {
-  none: { chip: 'bg-primary-50 text-primary-700' },
-  sky: { chip: 'bg-sky-50 text-sky-700' },
-  clay: { chip: 'bg-clay-50 text-clay-700' },
-  accent: { chip: 'bg-accent-50 text-accent-700' },
-};
-
-const componentGroups = [
-  {
-    label: 'Section components',
-    items: [
-      { icon: 'lucide:image', name: 'Hero (glass / split / dark)' },
-      { icon: 'lucide:panel-top', name: 'Page hero' },
-      { icon: 'lucide:trending-up', name: 'Stat band' },
-      { icon: 'lucide:hash', name: 'Stat' },
-      { icon: 'lucide:layout-grid', name: 'Card grid' },
-      { icon: 'lucide:square', name: 'Card' },
-      { icon: 'lucide:newspaper', name: 'News card' },
-      { icon: 'lucide:calendar', name: 'Event card' },
-      { icon: 'lucide:columns-2', name: 'Split' },
-      { icon: 'lucide:megaphone', name: 'Call to action' },
-      { icon: 'lucide:quote', name: 'Quote' },
-      { icon: 'lucide:text', name: 'Rich text' },
-      { icon: 'lucide:images', name: 'Gallery' },
-      { icon: 'lucide:list-collapse', name: 'Accordion' },
-      { icon: 'lucide:list-plus', name: 'Accordion item' },
-      { icon: 'lucide:triangle-alert', name: 'Alert banner' },
-      { icon: 'lucide:folder-open', name: 'Document list' },
-      { icon: 'lucide:file-text', name: 'Document item' },
-    ],
-  },
-  {
-    label: 'Primitives',
-    items: [
-      { icon: 'lucide:mouse-pointer-click', name: 'Button' },
-      { icon: 'lucide:heading', name: 'Heading' },
-      { icon: 'lucide:sparkles', name: 'Icon' },
-      { icon: 'lucide:image-plus', name: 'Image' },
-      { icon: 'lucide:minus', name: 'Divider' },
-      { icon: 'lucide:unfold-vertical', name: 'Spacer' },
-    ],
-  },
+const moreComponents = [
+  { icon: 'lucide:images', name: 'Gallery' },
+  { icon: 'lucide:list-collapse', name: 'Accordion' },
+  { icon: 'lucide:list-plus', name: 'Accordion item' },
+  { icon: 'lucide:triangle-alert', name: 'Alert banner' },
+  { icon: 'lucide:folder-open', name: 'Document list' },
+  { icon: 'lucide:file-text', name: 'Document item' },
+  { icon: 'lucide:mouse-pointer-click', name: 'Button' },
+  { icon: 'lucide:heading', name: 'Heading' },
+  { icon: 'lucide:sparkles', name: 'Icon' },
+  { icon: 'lucide:image-plus', name: 'Image' },
+  { icon: 'lucide:minus', name: 'Divider' },
+  { icon: 'lucide:unfold-vertical', name: 'Spacer' },
 ];
 
 const faqs = [
@@ -112,7 +61,7 @@ const faqs = [
   },
   {
     q: 'How do I rebrand it?',
-    a: 'Recolor one token block in the theme\'s global.css (a primary scale, an accent scale, two wayfinding families), swap the font packages and logo, and rebuild. The whole site re-skins — see the two screenshots above.',
+    a: 'Recolor one token block in the theme\'s global.css (a primary scale, an accent scale, two wayfinding families), swap the font packages and logo, and rebuild. The whole site re-skins.',
   },
   {
     q: 'What\'s the license?',
@@ -176,26 +125,26 @@ const stats = [
     <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
   </head>
 
-  <body class="bg-white">
+  <body class="bg-white overflow-x-clip">
     <a href="#main" class="sr-only focus:not-sr-only focus:absolute focus:z-[60] focus:bg-white focus:px-4 focus:py-2 focus:rounded-lg">Skip to content</a>
 
     <!-- ── Header ─────────────────────────────────────────────────── -->
-    <header class="sticky top-0 z-50 bg-white/90 backdrop-blur border-b border-primary-100">
-      <div class="max-w-content mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between gap-6 h-16">
+    <header class="sticky top-0 z-50 bg-primary-900/80 backdrop-blur-md border-b border-white/10">
+      <div class="max-w-site mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between gap-6 h-16">
         <a href="#" class="flex items-center gap-2.5" aria-label="DrupalX — top">
           <img src="/favicon.svg" alt="" class="w-8 h-8 rounded-lg" />
-          <span class="font-display font-semibold text-lg text-primary-800">DrupalX</span>
+          <span class="font-display font-semibold text-lg text-white">DrupalX</span>
         </a>
         <nav class="max-lg:hidden" aria-label="Sections">
           <ul class="flex items-center gap-1">
             {['Features', 'Components', 'Theming', 'Workflow', 'FAQ'].map((t) => (
               <li>
-                <a href={`#${t.toLowerCase()}`} class="px-3 py-2 rounded-lg text-[0.95rem] font-semibold text-ink-700 hover:text-primary-700 hover:bg-primary-50 transition-colors">{t}</a>
+                <a href={`#${t.toLowerCase()}`} class="px-3 py-2 rounded-lg text-[0.95rem] font-semibold text-primary-100 hover:text-white hover:bg-white/10 transition-colors">{t}</a>
               </li>
             ))}
           </ul>
         </nav>
-        <a href={GITHUB} class="inline-flex items-center gap-2 rounded-full bg-primary-700 px-5 py-2 text-sm font-semibold text-white hover:bg-primary-800 transition-colors">
+        <a href={GITHUB} class="inline-flex items-center gap-2 rounded-full bg-accent-500 px-5 py-2 text-sm font-bold text-primary-900 hover:bg-accent-400 transition-colors">
           <Icon name="lucide:github" class="size-4" aria-hidden="true" />
           GitHub
         </a>
@@ -203,138 +152,226 @@ const stats = [
     </header>
 
     <main id="main">
-      <!-- ── Hero ─────────────────────────────────────────────────── -->
+      <!-- ── Hero — type as graphic + the live terminal + screenshot ledge ── -->
       <section class="brand-glow relative overflow-hidden">
-        <div class="max-w-content mx-auto px-4 sm:px-6 lg:px-8 py-20 lg:py-28 grid items-center gap-12 lg:grid-cols-[1.1fr_1fr]">
-          <div class="min-w-0">
-            <p class="eyebrow text-accent-300">Drupal 11 · Canvas · Tailwind v4</p>
-            <h1 class="display-hero mt-4 text-white">
-              The Drupal starter your editors will <span class="text-accent-400">actually love</span>
-            </h1>
-            <p class="mt-5 max-w-xl text-lg leading-relaxed text-primary-100">
-              DrupalX pairs Canvas (Experience Builder) with a Tailwind v4 component
-              library — a real design system, composed page by page in the CMS.
-              One <code class="text-accent-200">ddev install</code> lands a complete five-page demo site.
-            </p>
-            <div class="mt-8 flex flex-wrap gap-3">
-              <a href={GITHUB} class="inline-flex items-center gap-2 rounded-full bg-accent-500 px-7 py-3.5 font-bold text-primary-900 hover:bg-accent-400 transition-colors">
-                Get started on GitHub
-                <Icon name="lucide:arrow-right" class="size-5" aria-hidden="true" />
-              </a>
-              <a href="#workflow" class="inline-flex items-center gap-2 rounded-full border border-white/40 bg-white/10 px-7 py-3.5 font-semibold text-white backdrop-blur-sm hover:bg-white/20 transition-colors">
-                How it works
-              </a>
-            </div>
-          </div>
+        <div class="max-w-site mx-auto px-4 sm:px-6 lg:px-8 pt-16 lg:pt-24">
+          <p class="eyebrow text-accent-300">Drupal 11 · Canvas · Tailwind v4 · GPL</p>
 
-          <!-- Quick-start terminal card -->
-          <div class="relative min-w-0">
-            <div class="absolute inset-0 translate-x-4 translate-y-4 rounded-2xl bg-accent-500/20" aria-hidden="true"></div>
-            <div class="term relative p-6 shadow-2xl">
-              <div class="flex gap-1.5 mb-4" aria-hidden="true">
-                <span class="w-3 h-3 rounded-full bg-clay-500/80"></span>
-                <span class="w-3 h-3 rounded-full bg-accent-500/80"></span>
-                <span class="w-3 h-3 rounded-full bg-primary-400/80"></span>
+          {/* The headline IS the graphic — full width, huge, one accent word. */}
+          <h1 class="display-hero mt-6 max-w-[13ch] text-white">
+            Drupal your editors will <em class="not-italic text-accent-400">actually&nbsp;love</em>
+          </h1>
+
+          {/* Broken grid: lede + CTAs left, the LIVE terminal right (tilted, gold plate). */}
+          <div class="mt-10 grid items-start gap-10 lg:mt-14 lg:grid-cols-[1fr_1.1fr] lg:gap-16">
+            <div class="min-w-0 max-w-xl">
+              <p class="text-xl leading-relaxed font-light text-primary-100">
+                A project template that pairs <strong class="font-semibold text-white">Canvas page building</strong> with a
+                <strong class="font-semibold text-white"> Tailwind design system</strong> — 24 schema-guarded components
+                your team composes in the CMS. One command lands a complete five-page demo site.
+              </p>
+              <div class="mt-8 flex flex-wrap gap-3">
+                <a href={GITHUB} class="inline-flex items-center gap-2 rounded-full bg-accent-500 px-7 py-3.5 font-bold text-primary-900 shadow-lg hover:bg-accent-400 transition-colors max-sm:w-full max-sm:justify-center">
+                  Get started on GitHub
+                  <Icon name="lucide:arrow-right" class="size-5" aria-hidden="true" />
+                </a>
+                <a href="#workflow" class="inline-flex items-center gap-2 rounded-full border border-white/40 bg-white/10 px-7 py-3.5 font-semibold text-white backdrop-blur-sm hover:bg-white/20 transition-colors max-sm:w-full max-sm:justify-center">
+                  How it works
+                </a>
               </div>
-              <pre id="quickstart"><code><span class="cmt"># the whole thing, three commands</span>
-<span class="prompt">$</span> git clone {GITHUB}.git
-<span class="prompt">$</span> cd drupalx-project <span class="tok">&amp;&amp;</span> ddev start
-<span class="prompt">$</span> ddev install
-<span class="cmt"># → five-page demo site, admin / admin</span></code></pre>
-              <button
-                id="copy-btn"
-                class="mt-4 inline-flex items-center gap-1.5 rounded-lg border border-white/20 px-3 py-1.5 text-xs font-semibold text-primary-100 hover:bg-white/10 transition-colors"
-                data-copy={`git clone ${GITHUB}.git\ncd drupalx-project && ddev start\nddev install`}
-              >
-                <Icon name="lucide:copy" class="size-3.5" aria-hidden="true" />
-                <span data-copy-label>Copy commands</span>
-              </button>
+            </div>
+
+            <div class="relative min-w-0 lg:-mt-6">
+              <div class="absolute inset-0 translate-x-4 translate-y-4 rounded-2xl bg-accent-500/20 lg:rotate-1" aria-hidden="true"></div>
+              <div class="term relative p-6 shadow-2xl lg:rotate-1">
+                <div class="flex items-center gap-1.5 mb-4" aria-hidden="true">
+                  <span class="w-3 h-3 rounded-full bg-clay-500/80"></span>
+                  <span class="w-3 h-3 rounded-full bg-accent-500/80"></span>
+                  <span class="w-3 h-3 rounded-full bg-primary-400/80"></span>
+                  <span class="ml-3 text-xs text-primary-300/60">drupalx — zsh</span>
+                </div>
+                {/* Rendered COMPLETE for no-JS / reduced motion; the typewriter
+                    script re-types it when motion is allowed. */}
+                <pre id="hero-term" data-typed><code><span class="cmt"># a working Drupal site, three commands</span>
+<span class="prompt">$</span> <span data-type-line>git clone {GITHUB}.git</span>
+<span class="prompt">$</span> <span data-type-line>cd drupalx-project && ddev start</span>
+<span class="prompt">$</span> <span data-type-line>ddev install</span>
+<span class="cmt" data-type-done># → five-page demo site · admin / admin</span></code></pre>
+                <button
+                  id="copy-btn"
+                  class="mt-4 inline-flex items-center gap-1.5 rounded-lg border border-white/20 px-3 py-1.5 text-xs font-semibold text-primary-100 hover:bg-white/10 transition-colors"
+                  data-copy={`git clone ${GITHUB}.git\ncd drupalx-project && ddev start\nddev install`}
+                >
+                  <Icon name="lucide:copy" class="size-3.5" aria-hidden="true" />
+                  <span data-copy-label>Copy commands</span>
+                </button>
+              </div>
             </div>
           </div>
-        </div>
 
-        <!-- Stat strip inside the dark band -->
-        <div class="border-t border-white/10">
-          <div class="max-w-content mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-2 sm:grid-cols-4 sm:divide-x divide-white/10 py-10">
+          {/* Big-number stats — numbers as graphic, inside the dark band. */}
+          <div class="mt-16 grid grid-cols-2 gap-y-8 sm:grid-cols-4 sm:divide-x divide-white/10">
             {stats.map((s) => (
-              <div class="px-2 py-3 text-center">
+              <div class="px-2 text-center">
                 <p class="stat-num text-white">{s.n}</p>
                 <p class="mt-1 text-xs font-semibold uppercase tracking-[0.12em] text-primary-200">{s.l}</p>
               </div>
             ))}
           </div>
+
+          {/* Full-bleed screenshot LEDGE — the real demo site rises out of the band. */}
+          <div class="relative mt-16 lg:mt-20">
+            <div class="mx-auto max-w-5xl">
+              <div class="rounded-t-2xl border border-b-0 border-white/20 bg-white/5 p-2 pb-0 backdrop-blur-sm shadow-2xl">
+                <img
+                  src="/img/starter-wide.webp"
+                  alt="The DrupalX demo homepage — split hero with photo card and stat chip"
+                  width="1600" height="960"
+                  fetchpriority="high"
+                  class="w-full rounded-t-xl"
+                />
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
-      <!-- ── Features ─────────────────────────────────────────────── -->
+      <!-- ── Features — BENTO, image-led, color-coded ─────────────── -->
       <section id="features" class="py-20 md:py-28" data-reveal>
         <div class="max-w-content mx-auto px-4 sm:px-6 lg:px-8">
           <div class="max-w-3xl mb-12">
             <p class="eyebrow">Why DrupalX</p>
-            <h2 class="display-xl mt-3">Everything a modern Drupal site needs, wired together</h2>
-            <p class="mt-4 text-lg leading-relaxed text-ink-500">
-              Not a blank theme — a working system. Design tokens, components, performance
-              discipline, and the Canvas editing experience, shipped as one template.
-            </p>
+            <h2 class="display-xl mt-3">Not a blank theme. A working system.</h2>
           </div>
-          <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {features.map((f) => (
-              <article class="spark-card flex flex-col rounded-2xl border border-primary-100 bg-white p-6 shadow-sm">
-                <span class={`mb-4 inline-flex w-12 h-12 items-center justify-center rounded-xl ${cMap[f.c].chip}`}>
-                  <Icon name={f.icon} class="size-6" aria-hidden="true" />
-                </span>
-                <h3 class="text-xl font-bold text-primary-800">{f.title}</h3>
-                <p class="mt-2 text-[0.95rem] leading-relaxed text-ink-500">{f.body}</p>
-              </article>
-            ))}
+
+          <div class="grid gap-6 lg:grid-cols-6">
+            {/* Featured 2×: Canvas editing, image-led. */}
+            <article class="spark-card lg:col-span-4 flex flex-col overflow-hidden rounded-2xl border border-primary-100 border-t-4 border-t-sky-600 bg-white shadow-sm">
+              <div class="overflow-hidden">
+                <img src="/img/editor-card.webp" alt="The Canvas editor: component layers, the live page, and a settings form" width="1200" height="549" loading="lazy" class="spark-card__img w-full object-cover" />
+              </div>
+              <div class="p-7">
+                <h3 class="text-2xl font-bold text-primary-800">Editors compose real pages in Canvas</h3>
+                <p class="mt-2 max-w-2xl text-[1.02rem] leading-relaxed text-ink-500">
+                  Drupal's Experience Builder, loaded with a component library that was designed
+                  for it. Drag from the library, edit props as plain form fields, nest cards into
+                  grids — the developer round-trip is gone.
+                </p>
+              </div>
+            </article>
+
+            {/* Design system card with a LIVE specimen (real tokens, no image needed). */}
+            <article class="spark-card lg:col-span-2 flex flex-col rounded-2xl border border-primary-100 border-t-4 border-t-clay-600 bg-white p-7 shadow-sm">
+              <div class="mb-5 flex items-end justify-between">
+                <p class="font-display text-6xl font-semibold leading-none text-primary-800">Aa</p>
+                <div class="flex gap-1.5" aria-hidden="true">
+                  {['bg-primary-700', 'bg-primary-500', 'bg-accent-500', 'bg-sky-600', 'bg-clay-500'].map((c) => (
+                    <span class={`h-8 w-8 rounded-lg ${c} shadow-sm`}></span>
+                  ))}
+                </div>
+              </div>
+              <h3 class="text-xl font-bold text-primary-800">A real design system</h3>
+              <p class="mt-2 text-[0.95rem] leading-relaxed text-ink-500">
+                Fraunces display + Inter body, a full brand scale, two wayfinding color
+                families — all Tailwind v4 tokens in one file.
+              </p>
+            </article>
+
+            <article class="spark-card lg:col-span-2 flex flex-col rounded-2xl border border-primary-100 border-t-4 border-t-accent-600 bg-white p-7 shadow-sm">
+              <p class="stat-num text-accent-500" aria-hidden="true">0</p>
+              <h3 class="mt-1 text-xl font-bold text-primary-800">CDN dependencies</h3>
+              <p class="mt-2 text-[0.95rem] leading-relaxed text-ink-500">
+                Self-hosted variable fonts, Lucide icons inlined as SVG at build time,
+                width-stepped WebP images via dx_image. Fast is the default.
+              </p>
+            </article>
+
+            <article class="spark-card lg:col-span-2 flex flex-col rounded-2xl border border-primary-100 border-t-4 border-t-primary-600 bg-white p-7 shadow-sm">
+              <span class="mb-4 inline-flex w-12 h-12 items-center justify-center rounded-xl bg-primary-50 text-primary-700">
+                <Icon name="lucide:shield-check" class="size-6" aria-hidden="true" />
+              </span>
+              <h3 class="text-xl font-bold text-primary-800">Guardrails for editors</h3>
+              <p class="mt-2 text-[0.95rem] leading-relaxed text-ink-500">
+                Schema-validated props: enums become selects, images use the media library,
+                repeatable content is real nested components. On-brand is the only option.
+              </p>
+            </article>
+
+            <article class="spark-card lg:col-span-2 flex flex-col rounded-2xl border border-primary-100 border-t-4 border-t-sky-600 bg-white p-7 shadow-sm">
+              <div class="term mb-4 px-4 py-3 text-xs">
+                <span class="prompt">$</span> npm run dev
+                <span class="cmt">  # :5050, live reload</span>
+              </div>
+              <h3 class="text-xl font-bold text-primary-800">Design without Drupal running</h3>
+              <p class="mt-2 text-[0.95rem] leading-relaxed text-ink-500">
+                The same Twig renders in a Twing static workbench — iterate on components in
+                milliseconds, then <code class="font-semibold text-primary-700">drush cr</code> puts them in the editor.
+              </p>
+            </article>
           </div>
         </div>
       </section>
 
-      <!-- ── Components ───────────────────────────────────────────── -->
-      <section id="components" class="bg-primary-50 py-20 md:py-28" data-reveal>
-        <div class="max-w-content mx-auto px-4 sm:px-6 lg:px-8">
-          <div class="max-w-3xl mb-12">
-            <p class="eyebrow">The component library</p>
-            <h2 class="display-xl mt-3">24 components, all Canvas-ready</h2>
-            <p class="mt-4 text-lg leading-relaxed text-ink-500">
-              Every one is a Single-Directory Component: a schema that drives the Canvas
-              edit form, and a Tailwind Twig template. The{' '}
-              <a href={`${GITHUB}/blob/main/web/themes/custom/drupalx_theme/COMPONENTS.md`} class="font-semibold text-primary-700 underline underline-offset-4 hover:text-primary-800">generated reference</a>{' '}
-              documents every prop, enum, and slot.
-            </p>
-          </div>
-          {componentGroups.map((group) => (
-            <div class="mb-8">
-              <h3 class="mb-4 text-xs font-bold uppercase tracking-[0.16em] text-ink-500">{group.label}</h3>
-              <ul class="flex flex-wrap gap-2.5">
-                {group.items.map((c) => (
-                  <li class="inline-flex items-center gap-2 rounded-full border border-primary-200 bg-white px-4 py-2 text-sm font-semibold text-primary-800 shadow-sm">
-                    <Icon name={c.icon} class="size-4 text-primary-500" aria-hidden="true" />
-                    {c.name}
-                  </li>
-                ))}
-              </ul>
+      <!-- ── Component wall — MARQUEE (alive, not a grid) ─────────── -->
+      <section id="components" class="bg-primary-50 py-20 md:py-24" data-reveal>
+        <div class="max-w-content mx-auto px-4 sm:px-6 lg:px-8 mb-10">
+          <div class="flex flex-wrap items-end justify-between gap-6">
+            <div class="max-w-2xl">
+              <p class="eyebrow">The component library</p>
+              <h2 class="display-xl mt-3">24 components, all Canvas-ready</h2>
             </div>
-          ))}
+            <a href={`${GITHUB}/blob/main/web/themes/custom/drupalx_theme/COMPONENTS.md`} class="inline-flex items-center gap-2 rounded-full border-2 border-primary-200 px-6 py-3 font-semibold text-primary-700 hover:border-primary-400 hover:bg-white transition-colors">
+              Read the component reference
+              <Icon name="lucide:arrow-up-right" class="size-4" aria-hidden="true" />
+            </a>
+          </div>
+        </div>
+        <div class="grid gap-4">
+          <div class="marquee">
+            <ul class="marquee__track">
+              {[false, true].map((dup) => (
+                <li class="contents" aria-hidden={dup}>
+                  {sectionComponents.map((c) => (
+                    <span class="inline-flex shrink-0 items-center gap-2.5 rounded-full border border-primary-200 bg-white px-5 py-3 font-semibold text-primary-800 shadow-sm">
+                      <Icon name={c.icon} class="size-5 text-sky-600" aria-hidden="true" />
+                      {c.name}
+                    </span>
+                  ))}
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div class="marquee">
+            <ul class="marquee__track marquee__track--reverse">
+              {[false, true].map((dup) => (
+                <li class="contents" aria-hidden={dup}>
+                  {moreComponents.map((c) => (
+                    <span class="inline-flex shrink-0 items-center gap-2.5 rounded-full border border-primary-200 bg-white px-5 py-3 font-semibold text-primary-800 shadow-sm">
+                      <Icon name={c.icon} class="size-5 text-clay-600" aria-hidden="true" />
+                      {c.name}
+                    </span>
+                  ))}
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
       </section>
 
-      <!-- ── Theming ──────────────────────────────────────────────── -->
-      <section id="theming" class="py-20 md:py-28" data-reveal>
-        <div class="max-w-content mx-auto px-4 sm:px-6 lg:px-8">
-          <div class="grid items-center gap-12 lg:grid-cols-2">
+      <!-- ── Theming — overlap composition, not a tidy 2-col ──────── -->
+      <section id="theming" class="relative overflow-hidden py-20 md:py-28" data-reveal>
+        <div class="pointer-events-none absolute inset-0" style="background: radial-gradient(50% 60% at 90% 10%, color-mix(in srgb, var(--color-accent-500) 10%, transparent), transparent 70%);" aria-hidden="true"></div>
+        <div class="max-w-content relative mx-auto px-4 sm:px-6 lg:px-8">
+          <div class="grid items-center gap-14 lg:grid-cols-[1fr_1.15fr]">
             <div class="min-w-0">
               <p class="eyebrow">The theming system</p>
               <h2 class="display-xl mt-3">Rebrand in one file</h2>
               <p class="mt-4 text-lg leading-relaxed text-ink-500">
-                Every brand decision is a token. Recolor the <code class="text-primary-700 font-semibold">@theme</code> block,
-                swap the fonts, rebuild — the whole site re-skins. The two screenshots
-                are the <em>same components</em>: the starter palette and a
-                cedar-green city brand, one CSS block apart.
+                Every brand decision is a token. These are the <em>same components</em> —
+                the starter palette and a cedar-green city brand, one CSS block apart.
               </p>
-              <div class="term mt-6 p-5">
-                <pre><code><span class="cmt">/* src/css/global.css — the whole brand */</span>
+              <div class="term mt-8 p-5 lg:-rotate-1 shadow-xl">
+                <pre><code><span class="cmt">/* global.css — the whole brand */</span>
 <span class="tok">@theme</span> &#123;
   --color-primary-500: <span class="prompt">#2f6fc4</span>;
   --color-accent-500:  <span class="prompt">#dfab34</span>;
@@ -343,66 +380,68 @@ const stats = [
 &#125;</code></pre>
               </div>
             </div>
-            <div class="grid grid-cols-2 gap-4">
-              <figure>
-                <img src="/img/starter-blue.webp" alt="The DrupalX demo homepage in the default blue starter brand" width="500" height="875" loading="lazy" class="rounded-2xl border border-primary-100 shadow-xl w-full" />
-                <figcaption class="mt-2 text-center text-xs font-semibold uppercase tracking-[0.12em] text-ink-500">The starter</figcaption>
+
+            {/* Overlapping, tilted screenshot pair. */}
+            <div class="relative min-w-0 pt-6 pb-10">
+              <figure class="relative z-10 w-[62%]">
+                <div class="absolute inset-0 -translate-x-3 translate-y-3 rounded-2xl bg-primary-100" aria-hidden="true"></div>
+                <img src="/img/starter-blue.webp" alt="The DrupalX demo homepage in the default blue starter brand" width="500" height="875" loading="lazy" class="relative rounded-2xl border border-primary-100 shadow-2xl w-full -rotate-1" />
+                <figcaption class="relative mt-3 text-xs font-bold uppercase tracking-[0.14em] text-ink-500">The starter</figcaption>
               </figure>
-              <figure class="translate-y-6">
-                <img src="/img/rebrand-green.webp" alt="The same components rebranded as a cedar-green municipal site" width="500" height="875" loading="lazy" class="rounded-2xl border border-primary-100 shadow-xl w-full" />
-                <figcaption class="mt-2 text-center text-xs font-semibold uppercase tracking-[0.12em] text-ink-500">One token block later</figcaption>
+              <figure class="absolute right-0 top-16 z-20 w-[58%]">
+                <div class="absolute inset-0 translate-x-3 translate-y-3 rounded-2xl bg-accent-500/25" aria-hidden="true"></div>
+                <img src="/img/rebrand-green.webp" alt="The same components rebranded as a cedar-green municipal site" width="500" height="875" loading="lazy" class="relative rounded-2xl border border-primary-100 shadow-2xl w-full rotate-2" />
+                <figcaption class="relative mt-3 text-right text-xs font-bold uppercase tracking-[0.14em] text-accent-700">One token block later</figcaption>
               </figure>
             </div>
           </div>
         </div>
       </section>
 
-      <!-- ── Workflow ─────────────────────────────────────────────── -->
+      <!-- ── Workflow — staggered steps with ghost numerals ───────── -->
       <section id="workflow" class="bg-primary-50 py-20 md:py-28" data-reveal>
         <div class="max-w-content mx-auto px-4 sm:px-6 lg:px-8">
-          <div class="max-w-3xl mb-12">
+          <div class="max-w-3xl mb-14">
             <p class="eyebrow">The workflow</p>
             <h2 class="display-xl mt-3">Install to editing in minutes</h2>
           </div>
           <ol class="grid gap-6 lg:grid-cols-3">
-            <li class="rounded-2xl border border-primary-100 bg-white p-6 shadow-sm">
-              <p class="stat-num text-accent-500" aria-hidden="true">1</p>
-              <h3 class="mt-2 text-lg font-bold">Install</h3>
-              <p class="mt-2 text-[0.95rem] text-ink-500"><code class="font-semibold text-primary-700">ddev install</code> builds Drupal 11 + Canvas and imports the five-page demo — pages, media, menus, the lot.</p>
-            </li>
-            <li class="rounded-2xl border border-primary-100 bg-white p-6 shadow-sm">
-              <p class="stat-num text-accent-500" aria-hidden="true">2</p>
-              <h3 class="mt-2 text-lg font-bold">Compose</h3>
-              <p class="mt-2 text-[0.95rem] text-ink-500">Open any page in the Canvas editor. Drag components from the library, edit props as form fields, nest cards into grids.</p>
-            </li>
-            <li class="rounded-2xl border border-primary-100 bg-white p-6 shadow-sm">
-              <p class="stat-num text-accent-500" aria-hidden="true">3</p>
-              <h3 class="mt-2 text-lg font-bold">Extend</h3>
-              <p class="mt-2 text-[0.95rem] text-ink-500">New component = one folder: a schema + a Twig file. Preview it in the live-reload static workbench, then <code class="font-semibold text-primary-700">drush cr</code> — it's in the editor.</p>
-            </li>
+            {[
+              { t: 'Install', d: 'ddev install builds Drupal 11 + Canvas and imports the five-page demo — pages, media, menus, the lot.', off: '' },
+              { t: 'Compose', d: 'Open any page in the Canvas editor. Drag components from the library, edit props as form fields, nest cards into grids.', off: 'lg:translate-y-10' },
+              { t: 'Extend', d: 'New component = one folder: a schema + a Twig file. Preview it in the live-reload workbench, then drush cr — it\'s in the editor.', off: 'lg:translate-y-20' },
+            ].map((s, i) => (
+              <li class={`relative overflow-hidden rounded-2xl border border-primary-100 bg-white p-8 pt-14 shadow-sm ${s.off}`}>
+                <span class="ghost-num" aria-hidden="true">{i + 1}</span>
+                <h3 class="relative text-2xl font-bold text-primary-800">{s.t}</h3>
+                <p class="relative mt-3 text-[0.98rem] leading-relaxed text-ink-500">{s.d}</p>
+              </li>
+            ))}
           </ol>
         </div>
       </section>
 
-      <!-- ── Editor ───────────────────────────────────────────────── -->
-      <section id="editor" class="py-20 md:py-28" data-reveal>
+      <!-- ── Editor — framed screenshot with floating annotations ─── -->
+      <section id="editor" class="py-20 md:py-28 lg:pt-36" data-reveal>
         <div class="max-w-content mx-auto px-4 sm:px-6 lg:px-8">
-          <div class="max-w-3xl mb-10">
+          <div class="max-w-3xl mb-12">
             <p class="eyebrow">The editing experience</p>
             <h2 class="display-xl mt-3">What your editors see</h2>
-            <p class="mt-4 text-lg leading-relaxed text-ink-500">
-              The real Canvas editor on the real demo site: the page tree on the left,
-              the live page in the middle, and a component's settings as a plain form on
-              the right — style variants as dropdowns, links with autocomplete, images
-              from the media library.
-            </p>
           </div>
-          <img
-            src="/img/editor.webp"
-            alt="The Drupal Canvas editor showing the DrupalX demo homepage with the component layers panel and a Button component's settings form open"
-            width="1400" height="856" loading="lazy"
-            class="rounded-2xl border border-primary-200 shadow-2xl w-full"
-          />
+          <div class="relative">
+            <div class="rounded-2xl border border-primary-200 bg-white p-2 shadow-2xl">
+              <img
+                src="/img/editor.webp"
+                alt="The Drupal Canvas editor showing the DrupalX demo homepage with the component layers panel and a Button component's settings form open"
+                width="1400" height="856" loading="lazy"
+                class="w-full rounded-xl"
+              />
+            </div>
+            {/* Floating annotation chips (decorative on mobile → hidden). */}
+            <p class="max-lg:hidden absolute left-[13%] top-[12%] rounded-full bg-primary-900/90 px-4 py-2 text-sm font-semibold text-white shadow-xl backdrop-blur">↖ Every component, a layer</p>
+            <p class="max-lg:hidden absolute right-[2%] top-[38%] translate-x-4 rounded-full bg-accent-500 px-4 py-2 text-sm font-bold text-primary-900 shadow-xl">Enums become selects →</p>
+            <p class="max-lg:hidden absolute bottom-[10%] left-[38%] rounded-full bg-sky-600 px-4 py-2 text-sm font-semibold text-white shadow-xl">The live page, mid-edit</p>
+          </div>
         </div>
       </section>
 
@@ -425,15 +464,15 @@ const stats = [
       </section>
 
       <!-- ── CTA ──────────────────────────────────────────────────── -->
-      <section class="brand-glow py-20 md:py-28" data-reveal>
+      <section class="brand-glow py-24 md:py-32" data-reveal>
         <div class="max-w-content mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <p class="eyebrow justify-center text-accent-300">Open source</p>
-          <h2 class="display-xl mx-auto mt-3 max-w-3xl text-white">GPL, like Drupal itself</h2>
-          <p class="mx-auto mt-4 max-w-2xl text-lg leading-relaxed text-primary-100">
+          <h2 class="display-hero mx-auto mt-4 max-w-[14ch] text-white">GPL, like Drupal itself</h2>
+          <p class="mx-auto mt-6 max-w-2xl text-lg leading-relaxed font-light text-primary-100">
             Clone it, rebrand it, ship it. If you build something good, we'd love to see it.
           </p>
-          <div class="mt-8 flex flex-wrap justify-center gap-3">
-            <a href={GITHUB} class="inline-flex items-center gap-2 rounded-full bg-accent-500 px-7 py-3.5 font-bold text-primary-900 hover:bg-accent-400 transition-colors">
+          <div class="mt-10 flex flex-wrap justify-center gap-3">
+            <a href={GITHUB} class="inline-flex items-center gap-2 rounded-full bg-accent-500 px-8 py-4 text-lg font-bold text-primary-900 shadow-xl hover:bg-accent-400 transition-colors">
               <Icon name="lucide:github" class="size-5" aria-hidden="true" />
               nextagencyio/drupalx-project
             </a>
@@ -443,7 +482,7 @@ const stats = [
     </main>
 
     <!-- ── Footer ─────────────────────────────────────────────────── -->
-    <footer class="bg-primary-900 text-primary-100">
+    <footer class="bg-primary-900 text-primary-100 border-t border-white/10">
       <div class="max-w-content mx-auto px-4 sm:px-6 lg:px-8 py-8 flex flex-col sm:flex-row items-center justify-between gap-3 text-sm">
         <p class="flex items-center gap-2">
           <img src="/favicon.svg" alt="" class="w-5 h-5 rounded" />
@@ -459,7 +498,8 @@ const stats = [
 
     <script>
       // Scroll-reveal (progressive enhancement — nothing hidden without JS).
-      if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches && 'IntersectionObserver' in window) {
+      const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (!reduced && 'IntersectionObserver' in window) {
         document.documentElement.classList.add('reveal-ready');
         const io = new IntersectionObserver(
           (entries) => entries.forEach((e) => {
@@ -471,6 +511,42 @@ const stats = [
           { rootMargin: '0px 0px -8% 0px', threshold: 0.05 },
         );
         document.querySelectorAll('[data-reveal]').forEach((el) => io.observe(el));
+      }
+
+      // Hero terminal typewriter — the page's live module. The terminal is
+      // rendered COMPLETE (no-JS / reduced-motion safe); with motion allowed
+      // we clear the command lines and re-type them once on first view.
+      const term = document.getElementById('hero-term');
+      if (term && !reduced && 'IntersectionObserver' in window) {
+        const lines = [...term.querySelectorAll('[data-type-line]')];
+        const done = term.querySelector('[data-type-done]');
+        const originals = lines.map((l) => l.textContent ?? '');
+        const typeOnce = async () => {
+          lines.forEach((l) => { l.textContent = ''; });
+          if (done) done.style.visibility = 'hidden';
+          for (let i = 0; i < lines.length; i++) {
+            const el = lines[i];
+            el.classList.add('type-caret');
+            for (const ch of originals[i]) {
+              el.textContent += ch;
+              await new Promise((r) => setTimeout(r, ch === ' ' ? 24 : 18 + Math.random() * 26));
+            }
+            await new Promise((r) => setTimeout(r, 260));
+            el.classList.remove('type-caret');
+          }
+          if (done) {
+            done.style.visibility = '';
+            done.classList.add('type-caret');
+            setTimeout(() => done.classList.remove('type-caret'), 2600);
+          }
+        };
+        const io = new IntersectionObserver((entries) => {
+          if (entries.some((e) => e.isIntersecting)) {
+            io.disconnect();
+            typeOnce();
+          }
+        }, { threshold: 0.4 });
+        io.observe(term);
       }
 
       // Copy the quick-start commands.
