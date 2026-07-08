@@ -123,13 +123,17 @@ const stats = [
     <meta name="twitter:title" content="DrupalX — the modern Drupal starter for Canvas" />
     <meta name="twitter:image" content="https://drupalx.ai/img/og.png" />
     <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+    {/* Synchronous on purpose: sets the header's at-top (transparent) state
+        before first paint. Without JS the class never appears and the header
+        stays solid — still safe. */}
+    <script is:inline>if (window.scrollY < 24) document.documentElement.classList.add('dx-at-top');</script>
   </head>
 
   <body class="bg-white overflow-x-clip">
     <a href="#main" class="sr-only focus:not-sr-only focus:absolute focus:z-[60] focus:bg-white focus:px-4 focus:py-2 focus:rounded-lg">Skip to content</a>
 
     <!-- ── Header ─────────────────────────────────────────────────── -->
-    <header id="site-header" class="fixed inset-x-0 top-0 z-50 transition-colors duration-300 header-solid">
+    <header id="site-header" class="fixed inset-x-0 top-0 z-50 transition-colors duration-300">
       <div class="max-w-site mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between gap-6 h-16">
         <a href="#" class="flex items-center" aria-label="DrupalX — top">
           <img src="/logo.svg" alt="DrupalX" width="92" height="25" class="h-6 w-auto" />
@@ -624,14 +628,11 @@ const stats = [
         io.observe(term);
       }
 
-      // Overlay header: transparent over the hero, night glass once scrolled.
-      // Ships solid (works without JS); this only REMOVES the surface at top.
-      const header = document.getElementById('site-header');
-      if (header) {
-        const update = () => header.classList.toggle('header-solid', window.scrollY > 24);
-        update();
-        window.addEventListener('scroll', update, { passive: true });
-      }
+      // Overlay header: the <head> inline script set the at-top state before
+      // first paint; this keeps it in sync while scrolling.
+      const updateHeader = () => document.documentElement.classList.toggle('dx-at-top', window.scrollY < 24);
+      updateHeader();
+      window.addEventListener('scroll', updateHeader, { passive: true });
 
       // Copy buttons (hero + CTA).
       document.querySelectorAll('[data-copy]').forEach((btn) => {

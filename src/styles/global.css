@@ -323,14 +323,18 @@ body {
 }
 
 
-/* Overlay header surface — present by default (no-JS safe); removed by JS
-   while the page is at the top so the hero glow runs behind the nav. */
-#site-header.header-solid {
+/* Overlay header surface — solid by DEFAULT (no-JS safe). The inline head
+   script adds .dx-at-top to <html> BEFORE first paint when the page loads at
+   the top, so the transparent state never flickers in after render. */
+#site-header {
   background: color-mix(in srgb, var(--color-night-950) 85%, transparent);
   -webkit-backdrop-filter: blur(12px);
   backdrop-filter: blur(12px);
   border-bottom: 1px solid rgb(255 255 255 / 0.1);
 }
-#site-header:not(.header-solid) {
-  border-bottom: 1px solid transparent;
+html.dx-at-top #site-header {
+  background: transparent;
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+  border-bottom-color: transparent;
 }
