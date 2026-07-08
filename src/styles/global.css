@@ -5,42 +5,52 @@
  * (deep DrupalX blue + warm gold accent, sky/clay wayfinding families).
  */
 @theme {
-  --color-primary-50: #eef4fc;
-  --color-primary-100: #d8e6f8;
-  --color-primary-200: #b0cdf1;
-  --color-primary-300: #7fade7;
-  --color-primary-400: #4f8bd9;
-  --color-primary-500: #2f6fc4;
-  --color-primary-600: #265aa3;
-  --color-primary-700: #1e4a86;
-  --color-primary-800: #173a69;
-  --color-primary-900: #102a4c;
+  /* Primary — DrupalX blue (the X gradient's anchor, #106EFD). */
+  --color-primary-50: #eef5ff;
+  --color-primary-100: #d9e8ff;
+  --color-primary-200: #b3d1ff;
+  --color-primary-300: #7fb0ff;
+  --color-primary-400: #418cff;
+  --color-primary-500: #106efd;
+  --color-primary-600: #0d5bd6;
+  --color-primary-700: #0b49ab;
+  --color-primary-800: #0a3a85;
+  --color-primary-900: #0a2452;
 
-  --color-accent-50: #fdf6e5;
-  --color-accent-100: #f8e6b6;
-  --color-accent-200: #f3d78e;
-  --color-accent-300: #ecc766;
-  --color-accent-400: #e5b94d;
-  --color-accent-500: #dfab34;
-  --color-accent-600: #b6841a;
-  --color-accent-700: #8f6712;
+  /* Accent — DrupalX cyan (the X gradient's end, #41E2F8). Bright values are
+     fills/decoration only; -700 clears AA as text on white. */
+  --color-accent-50: #ecfdff;
+  --color-accent-100: #cff8fe;
+  --color-accent-200: #a4f0fc;
+  --color-accent-300: #6ee8fa;
+  --color-accent-400: #41e2f8;
+  --color-accent-500: #22cbe4;
+  --color-accent-600: #0d9cb8;
+  --color-accent-700: #0b7a90;
 
+  /* Night — the dark-band surface (old site's radial slate). */
+  --color-night-800: #1e293b;
+  --color-night-900: #0f172a;
+  --color-night-950: #020617;
+
+  /* Wayfinding families: sky (soft blue) + indigo. */
   --color-sky-50: #eaf3fb;
   --color-sky-100: #cde3f5;
   --color-sky-300: #8fbde8;
   --color-sky-600: #2570b6;
   --color-sky-700: #1c5690;
 
-  --color-clay-50: #fbf0ea;
-  --color-clay-100: #f3d9cb;
-  --color-clay-400: #d4854f;
-  --color-clay-500: #c9703a;
-  --color-clay-600: #a4552a;
-  --color-clay-700: #82401f;
+  --color-indigo-50: #eef0fe;
+  --color-indigo-100: #dde1fd;
+  --color-indigo-400: #818cf8;
+  --color-indigo-500: #6470f3;
+  --color-indigo-600: #4d55d8;
+  --color-indigo-700: #3e42ae;
 
-  --color-ink: #212529;
-  --color-ink-700: #343a40;
-  --color-ink-500: #6c757d;
+  /* Ink — neutral text on white. */
+  --color-ink: #0f172a;
+  --color-ink-700: #334155;
+  --color-ink-500: #64748b;
 
   --font-sans: 'Inter Variable', ui-sans-serif, system-ui, sans-serif;
   --font-display: 'Fraunces Variable', ui-serif, Georgia, serif;
@@ -65,7 +75,7 @@ body {
 
 @layer base {
   h1, h2, h3, h4 {
-    color: var(--color-primary-800);
+    color: var(--color-night-900);
     font-weight: 700;
     letter-spacing: -0.01em;
   }
@@ -116,9 +126,19 @@ body {
 
 .brand-glow {
   background:
-    radial-gradient(60% 80% at 30% 20%,
-      color-mix(in srgb, var(--color-accent-500) 22%, transparent), transparent 70%),
-    var(--color-primary-900);
+    radial-gradient(55% 70% at 25% 15%,
+      color-mix(in srgb, var(--color-primary-500) 30%, transparent), transparent 70%),
+    radial-gradient(45% 60% at 85% 80%,
+      color-mix(in srgb, var(--color-accent-400) 14%, transparent), transparent 70%),
+    radial-gradient(circle at center, var(--color-night-900) 0%, var(--color-night-950) 100%);
+}
+
+/* The X-gradient as text — the brand's signature move. */
+.grad-text {
+  background: linear-gradient(92deg, var(--color-primary-400), var(--color-accent-400));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
 }
 
 .stat-num {
@@ -178,8 +198,9 @@ body {
 
 /* Terminal / code cards. */
 .term {
-  background: #0b1626;
-  color: #d7e3f4;
+  background: var(--color-night-950);
+  border: 1px solid rgb(255 255 255 / 0.08);
+  color: #d0dbdd;
   border-radius: 1rem;
   font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
   font-size: 0.875rem;
@@ -187,8 +208,8 @@ body {
   overflow-x: auto;
 }
 .term .prompt { color: var(--color-accent-400); user-select: none; }
+.term .tok { color: var(--color-primary-300); }
 .term .cmt { color: #64748b; }
-.term .tok { color: #8fbde8; }
 
 /* FAQ accordion — native details/summary, no JS. */
 .faq-item {
