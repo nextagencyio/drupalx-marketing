@@ -299,3 +299,16 @@ body {
   user-select: none;
   pointer-events: none;
 }
+
+
+/* Overlay header surface — present by default (no-JS safe); removed by JS
+   while the page is at the top so the hero glow runs behind the nav. */
+#site-header.header-solid {
+  background: color-mix(in srgb, var(--color-night-950) 85%, transparent);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgb(255 255 255 / 0.1);
+}
+#site-header:not(.header-solid) {
+  border-bottom: 1px solid transparent;
+}
