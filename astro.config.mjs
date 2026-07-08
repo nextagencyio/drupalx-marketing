@@ -6,7 +6,7 @@ import sitemap from '@astrojs/sitemap';
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://drupalx.dev',
+  site: 'https://drupalx.ai',
   integrations: [icon({ include: { lucide: ['*'] } }), sitemap()],
   vite: {
     plugins: [tailwindcss()],
