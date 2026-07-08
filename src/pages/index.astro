@@ -112,7 +112,7 @@ const stats = [
       name="description"
       content="DrupalX is a Drupal 11 project template built around Canvas (Experience Builder) and a Tailwind v4 component library — a real design system your editors compose with."
     />
-    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/favicon.ico" sizes="32x32" />
     <link rel="canonical" href="https://drupalx.dev/" />
     <meta property="og:type" content="website" />
     <meta property="og:title" content="DrupalX — the modern Drupal starter for Canvas" />
@@ -216,16 +216,17 @@ const stats = [
             ))}
           </div>
 
-          {/* Full-bleed screenshot LEDGE — the real demo site rises out of the band. */}
-          <div class="relative mt-16 lg:mt-20">
+          {/* Screenshot ledge — the real demo site OVERLAPS into the next
+              section (deliberate break, not a flush cut). */}
+          <div class="relative z-10 mt-16 lg:mt-20 -mb-20 lg:-mb-28">
             <div class="mx-auto max-w-5xl">
-              <div class="rounded-t-2xl border border-b-0 border-white/20 bg-white/5 p-2 pb-0 backdrop-blur-sm shadow-2xl">
+              <div class="rounded-2xl border border-white/20 bg-white/5 p-2 backdrop-blur-sm shadow-2xl">
                 <img
                   src="/img/starter-wide.webp"
                   alt="The DrupalX demo homepage — split hero with photo card and stat chip"
                   width="1600" height="960"
                   fetchpriority="high"
-                  class="w-full rounded-t-xl"
+                  class="w-full rounded-xl"
                 />
               </div>
             </div>
@@ -234,7 +235,7 @@ const stats = [
       </section>
 
       <!-- ── Features — BENTO, image-led, color-coded ─────────────── -->
-      <section id="features" class="py-20 md:py-28" data-reveal>
+      <section id="features" class="pt-40 pb-20 lg:pt-52 md:pb-28" data-reveal>
         <div class="max-w-content mx-auto px-4 sm:px-6 lg:px-8">
           <div class="max-w-3xl mb-12">
             <p class="eyebrow">Why DrupalX</p>
@@ -383,7 +384,7 @@ const stats = [
               <figure class="relative z-10 w-[62%]">
                 <div class="absolute inset-0 -translate-x-3 translate-y-3 rounded-2xl bg-primary-100" aria-hidden="true"></div>
                 <img src="/img/starter-blue.webp" alt="The DrupalX demo homepage in the default blue starter brand" width="500" height="875" loading="lazy" class="relative rounded-2xl border border-primary-100 shadow-2xl w-full -rotate-1" />
-                <figcaption class="relative mt-3 text-xs font-bold uppercase tracking-[0.14em] text-ink-500">The starter</figcaption>
+                <figcaption class="relative mt-3 text-xs font-bold uppercase tracking-[0.14em] text-ink-700">The starter</figcaption>
               </figure>
               <figure class="absolute right-0 top-16 z-20 w-[58%]">
                 <div class="absolute inset-0 translate-x-3 translate-y-3 rounded-2xl bg-accent-400/25" aria-hidden="true"></div>
@@ -444,18 +445,28 @@ const stats = [
 
       <!-- ── FAQ ──────────────────────────────────────────────────── -->
       <section id="faq" class="bg-primary-50 py-20 md:py-28" data-reveal>
-        <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
-          <div class="mb-10">
-            <p class="eyebrow">FAQ</p>
-            <h2 class="display-xl mt-3">Good questions</h2>
-          </div>
-          <div class="grid gap-3">
-            {faqs.map((f, i) => (
-              <details class="faq-item" open={i === 0}>
-                <summary>{f.q}</summary>
-                <div class="faq-body">{f.a}</div>
-              </details>
-            ))}
+        <div class="mx-auto max-w-content px-4 sm:px-6 lg:px-8">
+          <div class="grid gap-10 lg:grid-cols-[1fr_1.8fr] lg:gap-16">
+            <div>
+              <p class="eyebrow">FAQ</p>
+              <h2 class="display-xl mt-3">Frequently asked questions</h2>
+              <p class="mt-4 text-lg leading-relaxed text-ink-500">
+                The short version: it's a template you own, editors can't break it,
+                and Node is optional.
+              </p>
+              <a href={`${GITHUB}#readme`} class="mt-6 inline-flex items-center gap-2 font-semibold text-primary-700 underline underline-offset-4 hover:text-primary-600">
+                More in the README
+                <Icon name="lucide:arrow-up-right" class="size-4" aria-hidden="true" />
+              </a>
+            </div>
+            <div class="grid gap-3 self-start">
+              {faqs.map((f, i) => (
+                <details class="faq-item" open={i === 0}>
+                  <summary>{f.q}</summary>
+                  <div class="faq-body">{f.a}</div>
+                </details>
+              ))}
+            </div>
           </div>
         </div>
       </section>
@@ -463,17 +474,24 @@ const stats = [
       <!-- ── CTA ──────────────────────────────────────────────────── -->
       <section class="brand-glow py-24 md:py-32" data-reveal>
         <div class="max-w-content mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <p class="eyebrow justify-center text-accent-400">Open source</p>
-          <h2 class="display-hero mx-auto mt-4 max-w-[14ch] text-white">GPL, like Drupal itself</h2>
+          <p class="eyebrow justify-center text-accent-400">Free & open source · GPL, like Drupal</p>
+          <h2 class="display-hero mx-auto mt-4 max-w-[15ch] text-white">
+            Your next Drupal site is <em class="not-italic grad-text">three commands</em> away
+          </h2>
           <p class="mx-auto mt-6 max-w-2xl text-lg leading-relaxed font-light text-slate-300">
-            Clone it, rebrand it, ship it. If you build something good, we'd love to see it.
+            Clone it, run <code class="font-semibold text-accent-300">ddev install</code>, and walk through
+            the five-page demo with your team. Rebrand it Monday.
           </p>
-          <div class="mt-10 flex flex-wrap justify-center gap-3">
+          <div class="mt-10 flex flex-wrap items-center justify-center gap-3">
             <a href={GITHUB} class="inline-flex items-center gap-2 rounded-full bg-primary-600 px-8 py-4 text-lg font-bold text-white shadow-xl shadow-primary-500/30 hover:bg-primary-500 transition-colors">
               <Icon name="lucide:github" class="size-5" aria-hidden="true" />
-              nextagencyio/drupalx-project
+              Clone the template
+            </a>
+            <a href={`${GITHUB}#quick-start`} class="inline-flex items-center gap-2 rounded-full border border-white/40 bg-white/10 px-8 py-4 text-lg font-semibold text-white backdrop-blur-sm hover:bg-white/20 transition-colors">
+              Read the quick start
             </a>
           </div>
+          <p class="mt-8 text-sm text-slate-400">GPL-2.0-or-later · free for client work · no lock-in</p>
         </div>
       </section>
     </main>
